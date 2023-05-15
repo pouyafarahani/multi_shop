@@ -16,8 +16,20 @@
                         Account
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">Sign in</button>
-                        <button class="dropdown-item" type="button">Sign up</button>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}">
+                                <button class="dropdown-item" type="button">log out</button>
+                            </a>
+
+                        {% else %}
+
+                            <a href="">
+                                <button class="dropdown-item" type="button">Sign up</button>
+                            </a>
+                            <a href="{% url 'login' %}">
+                                <button class="dropdown-item" type="button">Log in</button>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="btn-group mx-2">
