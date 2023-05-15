@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -22,6 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # party
+
+    # local
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
