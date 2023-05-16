@@ -1,14 +1,16 @@
 from ckeditor.fields import RichTextField
+from django.urls import reverse
+
 from .category import *
+from .image import ImageModel
 
 
 class ProductModel(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    image = models.ForeignKey(ImageModel, on_delete=models.CASCADE, related_name='products_image')
 
     description = RichTextField()
     short_description = RichTextField(blank=True)
-
-    image = models.ImageField(upload_to='cover_products/')
 
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
@@ -32,3 +34,6 @@ class ProductModel(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('products:product_Detail', args=[self.pk])
