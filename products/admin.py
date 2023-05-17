@@ -1,9 +1,21 @@
 from django.contrib import admin
+from .models.product_model import ProductModel, Category
+from .models.product_image import ProductImage
 
-from .models.product_model import ProductModel
-from .models.category import Category
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
 
 
-admin.site.register(ProductModel)
-admin.site.register(Category)
+class CategoryInline(admin.TabularInline):
+    model = Category
+    extra = 1
 
+
+@admin.register(ProductModel)
+class ProductModelAdmin(admin.ModelAdmin):
+    inlines = [CategoryInline, ProductImageInline]
+
+
+admin.site.register(ProductImage)

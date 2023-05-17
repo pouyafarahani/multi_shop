@@ -2,7 +2,7 @@ from django.views import View
 from django.shortcuts import render
 
 from products.models.product_model import ProductModel
-from products.models.category import Category
+from products.models.product_model import Category
 
 
 class HomeView(View):
