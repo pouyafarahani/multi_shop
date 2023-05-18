@@ -5,7 +5,6 @@ from django.urls import reverse
 
 class ProductModel(models.Model):
     title = models.CharField(max_length=150)
-
     description = RichTextField()
     short_description = RichTextField(blank=True)
 

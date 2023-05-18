@@ -17,3 +17,5 @@ class CategoryInline(admin.TabularInline):
 class ProductModelAdmin(admin.ModelAdmin):
     inlines = [CategoryInline, ProductImageInline]
 
+
+admin.site.register(ProductImage)
