@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 
-from .models.product_model import ProductModel
+from .models.product import ProductModel
 
 
 class ProductListView(ListView):
@@ -12,4 +12,4 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = ProductModel
     template_name = 'products/product_detail.html'
-    context_object_name = 'product'
+    context_object_name = 'products'

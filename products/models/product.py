@@ -2,8 +2,12 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.urls import reverse
 
+from .product_category import Category
+
 
 class ProductModel(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
     title = models.CharField(max_length=150)
     description = RichTextField()
     short_description = RichTextField(blank=True)
@@ -32,13 +36,3 @@ class ProductModel(models.Model):
 
     def get_absolute_url(self):
         return reverse('products:product_Detail', args=[self.pk])
-
-
-class Category(models.Model):
-    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='category')
-
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='cover_category/')
-
-    def __str__(self):
-        return self.product.title

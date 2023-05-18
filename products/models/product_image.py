@@ -1,4 +1,4 @@
-from .product_model import *
+from .product import *
 
 
 class ProductImage(models.Model):
