@@ -9,5 +9,4 @@ class HomeView(View):
     category = Category.objects.all()
 
     def get(self, request):
-        print(self.product.values())
         return render(request, 'home/home.html', {'category': self.category, 'products': self.product})
