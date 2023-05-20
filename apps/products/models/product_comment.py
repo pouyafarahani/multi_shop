@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from product import *
+from apps.products.models.product import *
 
 
 class ProductComment(models.Model):
@@ -9,3 +9,6 @@ class ProductComment(models.Model):
 
     description = models.TextField()
     rating = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.author}: {self.products.title}'
