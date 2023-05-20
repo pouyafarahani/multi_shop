@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse, resolve
 
-from .views import SignupPageView
-from .forms import CustomUserCreationForm
+from apps.accounts.views.signup import SignupPageView
+from apps.accounts.forms.signup import CustomUserCreationForm
 
 
 class CustomUserTests(TestCase):

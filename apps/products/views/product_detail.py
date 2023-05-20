@@ -1,6 +1,6 @@
 from django.views.generic import DetailView
 
-from products.models.product import ProductModel
+from apps.products.models.product import ProductModel
 
 
 class ProductDetailView(DetailView):
