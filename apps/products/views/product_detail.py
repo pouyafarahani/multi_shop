@@ -1,9 +1,13 @@
-from django.views.generic import DetailView
+from django.views import View
 
 from apps.products.models.product import ProductModel
+from apps.products.models.product_comment import ProductComment
+
+from django.shortcuts import get_object_or_404, render
 
 
-class ProductDetailView(DetailView):
-    model = ProductModel
-    template_name = 'products/product_detail.html'
-    context_object_name = 'products'
+class ProductDetailView(View):
+    def get(self, request, pk):
+        product = get_object_or_404(ProductModel, pk=pk)
+        comment = ProductComment.objects.all()
+        return render(request, 'products/product_detail.html', {'products': product, 'comments': comment})
