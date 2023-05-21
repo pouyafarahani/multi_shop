@@ -10,4 +10,7 @@ class ProductDetailView(View):
     def get(self, request, pk):
         product = get_object_or_404(ProductModel, pk=pk)
         comment = ProductComment.objects.all()
-        return render(request, 'products/product_detail.html', {'products': product, 'comments': comment})
+        products_like = ProductModel.objects.filter(featured_products=True)
+        print('#######', products_like)
+        return render(request, 'products/product_detail.html',
+                      {'products': product, 'comments': comment, 'products_like': products_like})
