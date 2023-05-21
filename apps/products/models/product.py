@@ -11,6 +11,7 @@ class ProductModel(models.Model):
     title = models.CharField(max_length=150)
     description = RichTextField()
     short_description = RichTextField(blank=True)
+    information = RichTextField(blank=True)
 
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)

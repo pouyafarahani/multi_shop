@@ -10,5 +10,7 @@ class ProductComment(models.Model):
     description = models.TextField()
     rating = models.PositiveIntegerField(default=0)
 
+    create_comment = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return f'{self.author}: {self.products.title}'
