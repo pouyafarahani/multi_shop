@@ -2,7 +2,7 @@ from django.urls import path
 
 from apps.products.views.product_list import ProductListView
 from apps.products.views.product_detail import ProductDetailView
-from apps.products.views.rate_comment import rate_comment
+from apps.products.views.product_comment import rate_comment
 
 app_name = 'products'
 

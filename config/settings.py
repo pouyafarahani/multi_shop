@@ -24,6 +24,7 @@ LOCALE_APPS = [
     'apps.accounts.apps.AccountsConfig',
     'apps.products.apps.ProductsConfig',
     'apps.contact.apps.ContactConfig',
+    'apps.carts.apps.CartsConfig',
 ]
 
 INSTALLED_APPS = [
