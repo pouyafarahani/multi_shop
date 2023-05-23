@@ -39,13 +39,15 @@
                             <tr>
 
                                 <td class="align-middle"><img src="{{ item.product_obj.images.all.0.image.url }}" alt=""
-                                                              style="width: 50px;"> {{ item.product_obj.title }}
+                                                              style="width: 50px;"> <a
+                                        href="{% url 'products:product_Detail' item.product_obj.id %}">{{ item.product_obj.title }} </a>
                                 </td>
                                 <td class="align-middle">${{ item.product_obj.price }}</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
-                                            <form method="post" action="{% url 'cart:cart_deduct' item.product_obj.id %}">
+                                            <form method="post"
+                                                  action="{% url 'cart:cart_deduct' item.product_obj.id %}">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="quantity" value="1">
                                                 <input type="hidden" name="inplace" value="False">
