@@ -15,8 +15,7 @@ def add_to_cart_view(request, product_id):
         cleaned_deta = form.cleaned_data
         quantity = cleaned_deta['quantity']
         cart.add(product, quantity, replace_quantity=cleaned_deta['inplace'])
-
+        print('valid bod')
     else:
-        print(form)
-
+        print('bazm valid nistt')
     return redirect('cart:cart_detail')

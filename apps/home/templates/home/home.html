@@ -155,8 +155,14 @@
                                     <img class="img-fluid w-100" src="{{ product.images.all.0.image.url }}" alt="">
                                 {% endif %}
                                 <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i
-                                            class="fa fa-shopping-cart"></i></a>
+                                    <form method="post" action="{% url 'cart:cart_add' product.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="inplace" value="False">
+                                        <button type="submit" class="btn btn-outline-dark btn-square">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    </form>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i
                                             class="fa fa-sync-alt"></i></a>

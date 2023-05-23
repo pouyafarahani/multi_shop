@@ -7,3 +7,4 @@ class AddToCartProductForm(forms.Form):
     quantity = forms.TypedChoiceField(choices=QUANTITY_CHOISE, coerce=int, initial=1)
 
     inplace = forms.BooleanField(required=False, widget=forms.HiddenInput)
+
