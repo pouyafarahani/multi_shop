@@ -24,6 +24,18 @@ class Cart:
             messages.success(self.request, 'add cart success')
         self.save()
 
+    def deduct(self, product, quantity=1, replace_quantity=False):
+        product_id = str(product.id)
+        if product_id not in self.cart:
+            self.cart[product_id] = {'quantity': 0}
+        if replace_quantity:
+            self.cart[product_id]['quantity'] = quantity  # replace = True
+        else:
+            self.cart[product_id]['quantity'] -= quantity  # replace = false
+
+            messages.success(self.request, 'deduct cart success')
+        self.save()
+
     def remove(self, product):
         product_id = str(product.id)
         if product_id in self.cart:
