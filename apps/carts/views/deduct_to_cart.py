@@ -1,3 +1,5 @@
+from django.http import HttpRequest, HttpResponse
+
 from .cart_detail import *
 
 from django.shortcuts import get_object_or_404, redirect
@@ -5,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from apps.products.models.product import ProductModel
 
 
-def deduct_to_cart_view(request, product_id):
+def deduct_to_cart_view(request: HttpRequest, product_id: int) -> HttpResponse:
     cart = Cart(request)
     product = get_object_or_404(ProductModel, id=product_id)
     form = AddToCartProductForm(request.POST)

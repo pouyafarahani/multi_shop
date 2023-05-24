@@ -21,6 +21,9 @@ class CustomUserTests(TestCase):
         self.assertFalse(user.is_superuser)
 
     def test_create_superuser(self):
+        """
+        Test creating a new superuser.
+        """
         User = get_user_model()
         admin_user = User.objects.create_superuser(
             username='superadmin',
@@ -37,23 +40,34 @@ class CustomUserTests(TestCase):
 class SignupPageTests(TestCase):
 
     def setUp(self):
-        url = reverse('signup')
-        self.response = self.client.get(url)
+        self.url = reverse('signup')
+        self.response = self.client.get(self.url)
 
-    def test_signup_template(self):  # new
-        self.assertEqual(self.response.status_code, 200)
-        self.assertTemplateUsed(self.response, 'registration/signup.html')
-        self.assertNotContains(
-            self.response, 'Hi there! I should not be on the page.')
+    def test_signup_page(self):
+        """
+        Test signup page response, template and view name.
+        """
+        with self.subTest(name="response status code"):
+            self.assertEqual(self.response.status_code, 200)
 
-    def test_signup_form(self):  # new
-        form = self.response.context.get('form')
-        self.assertIsInstance(form, CustomUserCreationForm)
-        self.assertContains(self.response, 'csrfmiddlewaretoken')
+        with self.subTest(name="template used"):
+            self.assertTemplateUsed(
+                self.response, 'registration/signup.html')
 
-    def test_signup_view(self):  # new
-        view = resolve('/accounts/register/')
-        self.assertEqual(
-            view.func.__name__,
-            SignupPageView.as_view().__name__
-        )
+        with self.subTest(name="content not contains"):
+            self.assertNotContains(
+                self.response, 'Hi there! I should not be on the page.')
+
+        with self.subTest(name="form instance"):
+            form = self.response.context.get('form')
+            self.assertIsInstance(form, CustomUserCreationForm)
+
+        with self.subTest(name="csrf token"):
+            self.assertContains(self.response, 'csrfmiddlewaretoken')
+
+        with self.subTest(name="view function"):
+            view = resolve('/accounts/register/')
+            self.assertEqual(
+                view.func.__name__,
+                SignupPageView.as_view().__name__
+            )

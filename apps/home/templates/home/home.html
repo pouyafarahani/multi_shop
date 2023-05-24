@@ -122,7 +122,10 @@
         <div class="row px-xl-5 pb-3">
             {% for Category in category %}
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
+                    <a href="{% url 'products:search_results' %}?q={{ Category.name }}">
+                        <label>
+                            <input type="text" name="q" value="{{ Category.name }}" hidden>
+                        </label>
                         <div class="cat-item d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
                                 <img class="img-fluid" src="{{ Category.image.url }}" alt="">

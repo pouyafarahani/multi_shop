@@ -3,15 +3,58 @@
 {% block title %}Search{% endblock title %}
 
 {% block content %}
-  <h1>Search Results</h1>
-  {% for product in product_list %}
-    <div>
-      <h3><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
-        <img src="{{ product.images.all.0.image.url }}" style="width: 150px" alt="">
-      <p>title: {{ product.title }}</p>
-      <p>Price: $ {{ product.price }}</p>
+    <!-- Products Start -->
+    <div class="container-fluid pt-5 pb-3">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3 hiden">Search Results</span>
+        </h2>
+        <div class="row px-xl-5">
+            {% for product in product_list %}
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            {% if product.images.all %}
+                                <img class="img-fluid w-100" src="{{ product.images.all.0.image.url }}" alt="">
+                            {% endif %}
+                            <div class="product-action">
+                                <form method="post" action="{% url 'cart:cart_add' product.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="inplace" value="False">
+                                    <button type="submit" class="btn btn-outline-dark btn-square">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </button>
+                                </form>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i
+                                        class="fa fa-sync-alt"></i></a>
+                                <form action="{% url 'products:search_results' %}" method="get">
+                                    <button class="btn btn-outline-dark btn-square">
+                                        <input type="text" hidden value="{{ product.title }}" name="q">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate"
+                               href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>${{ product.price }}</h5>
+
+                                {% if product.discount %}
+                                    <h6 class="text-muted ml-2">
+                                        <del>${{ product.discount }}</del>
+                                    </h6>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <h3>not found</h3>
+            {% endfor %}
+        </div>
     </div>
-      {% empty %}
-      <h1>not found</h1>
-{% endfor %}
+    <!-- Products End -->
 {% endblock content %}
