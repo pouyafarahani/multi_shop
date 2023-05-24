@@ -6,7 +6,7 @@ from .product_category import Category
 
 
 class ProductModel(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
 
     title = models.CharField(max_length=150)
     description = RichTextField()

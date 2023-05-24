@@ -129,7 +129,7 @@
                             </div>
                             <div class="flex-fill pl-3">
                                 <h6>{{ Category.name }}</h6>
-                                <small class="text-body">{{ category.count }} Products</small>
+                                <small class="text-body">{{ Category.category.count }} Products</small>
                             </div>
                         </div>
                     </a>
@@ -166,7 +166,12 @@
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i
                                             class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                    <form action="{% url 'products:search_results' %}" method="get">
+                                        <button class="btn btn-outline-dark btn-square">
+                                            <input type="text" hidden value="{{ product.title }}" name="q">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="text-center py-4">
@@ -246,7 +251,12 @@
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i
                                             class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                    <form action="{% url 'products:search_results' %}" method="get">
+                                        <button class="btn btn-outline-dark btn-square">
+                                            <input type="text" hidden value="{{ product.title }}" name="q">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="text-center py-4">

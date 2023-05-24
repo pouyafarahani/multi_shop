@@ -8,7 +8,7 @@ from django.views.generic import ListView
 class SearchResultsListView(ListView):
     model = ProductModel
     context_object_name = 'product_list'
-    template_name = 'products/search_results.html'
+    template_name = 'products/product_search.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
