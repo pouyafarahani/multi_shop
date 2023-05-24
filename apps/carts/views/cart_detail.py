@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from django.views.decorators.cache import cache_page
 
 from ..cart import Cart
 from ..forms.cart_form import AddToCartProductForm
 
 
-@cache_page(600)  # 600sec == 10 min
 def cart_detail_view(request):
     cart = Cart(request)
 

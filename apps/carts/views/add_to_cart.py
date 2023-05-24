@@ -8,7 +8,6 @@ from apps.products.models.product import ProductModel
 def add_to_cart_view(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(ProductModel, id=product_id)
-    print(request.POST)
     form = AddToCartProductForm(request.POST)
 
     if form.is_valid():
