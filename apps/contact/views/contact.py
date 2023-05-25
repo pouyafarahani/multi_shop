@@ -6,7 +6,6 @@ from django.views.decorators.cache import cache_page
 from ..forms.form_contact import ContactForms
 
 
-@method_decorator(cache_page(600), name='dispatch')  # 600sec == 10 min
 class ContactView(View):
     template_name = 'contact/contact.html'
 
