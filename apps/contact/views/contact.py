@@ -1,7 +1,6 @@
+from django.contrib import messages
 from django.shortcuts import render
-from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.decorators.cache import cache_page
 
 from ..forms.form_contact import ContactForms
 
@@ -18,4 +17,8 @@ class ContactView(View):
             message = form.save(commit=False)
             message.author = request.user
             message.save()
+            messages.success(request, 'Thank you for your comment')
+        else:
+            messages.warning(request, 'Enter the information correctly')
+
         return render(request, self.template_name, {'form': form})

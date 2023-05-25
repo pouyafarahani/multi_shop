@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 
 from .cart_detail import *
@@ -17,5 +18,5 @@ def deduct_to_cart_view(request: HttpRequest, product_id: int) -> HttpResponse:
         quantity = cleaned_deta['quantity']
         cart.deduct(product, quantity, replace_quantity=cleaned_deta['inplace'])
     else:
-        pass
+        messages.warning(request, 'Unfortunately, there is a problem')
     return redirect('cart:cart_detail')

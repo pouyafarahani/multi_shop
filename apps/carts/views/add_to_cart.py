@@ -1,3 +1,5 @@
+from django.contrib import messages
+
 from .cart_detail import *
 
 from django.shortcuts import get_object_or_404, redirect
@@ -14,7 +16,6 @@ def add_to_cart_view(request, product_id):
         cleaned_deta = form.cleaned_data
         quantity = cleaned_deta['quantity']
         cart.add(product, quantity, replace_quantity=cleaned_deta['inplace'])
-        print('valid bod')
     else:
-        print('bazm valid nistt')
+        messages.warning(request, 'Unfortunately, there is a problem')
     return redirect('cart:cart_detail')

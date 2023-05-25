@@ -28,7 +28,7 @@ class Cart:
         product_id = str(product.id)
         if product_id in self.cart:
             del self.cart[product_id]
-            messages.success(self.request, 'remove cart success')
+            messages.warning(self.request, 'remove cart success')
             self.save()
 
     def deduct(self, product, quantity=1, replace_quantity=False):

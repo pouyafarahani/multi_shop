@@ -1,11 +1,10 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
-from django.views.decorators.cache import cache_page
 
 from ..models.product import ProductModel
 from ..forms.product_comment import ProductCommentForm
 
 
-@cache_page(600)  # 600sec == 10 min
 def rate_comment(request, pk):
     comment_form = ProductCommentForm(request.POST)
     if request.method == 'POST':
@@ -14,6 +13,7 @@ def rate_comment(request, pk):
             comment.author = request.user
             comment.products = get_object_or_404(ProductModel, pk=pk)
             comment.save()
+            messages.success(request, 'Thank you for your comment')
         else:
-            pass
+            messages.warning(request, 'Enter the information correctly')
     return redirect('products:product_Detail', pk=pk)
